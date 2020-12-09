@@ -26,6 +26,7 @@ struct CodablePokemon: Decodable{
     let baseExperience: Int
     let abilities: [Ability]
     let species : [Species]
+    let sprites : [Sprites]
 //an object is not codable or decodable if not all of its properties are
     
     //enums can have raw values
@@ -38,6 +39,7 @@ struct CodablePokemon: Decodable{
         case baseExperience = "base_experience"
         case abilities
         case species
+        case sprites
         
         
         
@@ -121,6 +123,19 @@ struct Sprites: Decodable{
         
     }
 
+}
+
+struct Weight: Decodable{
+    let weight: Int
+    
+    enum CodingKeys: String, CodingKey{
+        case weight
+    }
+    init(from decoder: Decoder) throws{
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.weight = try container.decode(Int.self, forKey: .weight)
+    
+    }
 }
 
 
